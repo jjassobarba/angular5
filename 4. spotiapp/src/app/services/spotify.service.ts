@@ -9,7 +9,7 @@ export class SpotifyService {
   topTracks: any[] = [];
 
   urlSpotify = 'https://api.spotify.com/v1/';
-  authHeader = 'BQBtFT-0vTdGxlNcrVUEzVh28BaxR23aahO1qSy9Kr8wP-TzilaK3tMClZ6vDHtjKtQBFpgSSdk1WgG8yZ4';
+  authHeader = 'BQD0f9K3eRsivsiomLvKpDsSD4mKNNPuND6l8hWjKZndy1GYm_HvwgjX2OGmi5Tt5US4l__NgZI9Wg8wFQk';
 
   constructor(public http: HttpClient) { }
 
