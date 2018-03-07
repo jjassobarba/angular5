@@ -32,7 +32,17 @@
             </td>
           </tr>
         </tbody>
-      </table>     
+      </table>  
+      
+      <div class="alert alert-info" role="alert" *ngIf="(heroes | keys).length === 0 && !loading">
+        <strong>No hay</strong> superheroes que mostrar
+      </div>
+
+      <div class="alert alert-warning" role="alert" *ngIf="loading">
+        <strong>Cargando</strong> por favor espere
+      </div>
+
+      
 
     </div>
   </div>
