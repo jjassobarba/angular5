@@ -13,11 +13,11 @@ export class HeroesComponent implements OnInit {
   loading = true;
 
   constructor(private _heroesService: HeroesService) {
-    this._heroesService.getHeroes().subscribe(data => {      
+    this._heroesService.getHeroes().subscribe(data => {
       setTimeout(() => {
         this.loading = false;
-        this.heroes = data;}
-        ,1500
+        this.heroes = data; }
+        , 1500
       );
     });
   }
