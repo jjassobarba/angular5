@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
-
-
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PeliculasService } from './providers/peliculas.service';
@@ -13,6 +12,8 @@ import { APP_ROUTING } from './app.routes';
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { PeliculaImagenPipe } from './pipes/pelicula-imagen.pipe';
 import { GaleriaComponent } from './components/home/galeria.component';
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GaleriaComponent } from './components/home/galeria.component';
     BrowserModule,
     HttpModule,
     JsonpModule,
+    FormsModule,
     APP_ROUTING
   ],
   providers: [PeliculasService],

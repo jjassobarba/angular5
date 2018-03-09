@@ -10,6 +10,8 @@ export class PeliculasService {
   private apikey = '4cd627965f7372c798bd21a142c1f7b5';
   private urlMoviedb = 'https://api.themoviedb.org/3';
 
+  peliculas: any[] = [];
+
   constructor( private jsonp: Jsonp ) { }
 
   getCartelera() {
@@ -53,8 +55,17 @@ export class PeliculasService {
     // tslint:disable-next-line:max-line-length
     const URL = `${ this.urlMoviedb }/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=${ this.apikey }&language=es&callback=JSONP_CALLBACK`;
 
-    return this.jsonp.get( URL )
-                .map( res => res.json());
+    return this.jsonp.get( URL ).map( res => {
+      this.peliculas = res.json().results;
+      return res.json();
+    });
+  }
+
+  getPelicula(id: string) {
+    // tslint:disable-next-line:max-line-length
+    const URL = `${ this.urlMoviedb }/movie/${ id }?api_key=${ this.apikey }&language=es&callback=JSONP_CALLBACK`;
+
+    return this.jsonp.get( URL ).map( res => res.json());
   }
 
 }
