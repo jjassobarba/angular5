@@ -1,1 +1,23 @@
 <app-navbar></app-navbar>
+
+<div class="container main-container">
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Marcador</h5>
+    </div>
+
+    <div class="col-md-8">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="true" (mapClick)="clickMapa($event)">
+        <agm-marker [latitude]="marcador.lat" [longitude]="marcador.lng" *ngFor="let marcador of _ms.marcadores" [title]="marcador.titulo" [markerDraggable]="marcador.draggable">
+          <agm-info-window>        
+            <p ng-if="marcador.desc">
+              <strong>{{ marcador.titulo }}</strong>
+                {{ marcador.desc }}
+            </p>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+
+  </div>
+</div>
