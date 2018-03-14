@@ -3,7 +3,13 @@
 <div class="container main-container">
   <div class="row">
     <div class="col-md-4">
-      <div *ngIf="marcadorSel">
+      <div *ngIf="!marcadorSel" class="animated fadeIn fast">
+        <div class="alert alert-info" role="alert">
+          <strong>Haga click en el mapa para crear un marcador o seleccione uno.</strong>
+        </div>
+      </div>
+
+      <div *ngIf="marcadorSel" class="animated fadeIn fast">
         <h5>Marcador</h5>
         <hr>
         <div class="form-group">
@@ -17,9 +23,10 @@
         </div>
 
         <div class="form-group">
-          <select class=form-control [(ngModel)]="marcadorSel.draggable" name="draggable">
-            <option value="true">Si</option>
-            <option value="false">No</option>
+          <label>Se puede mover?</label>
+          <select class=form-control [(ngModel)]="draggable" name="draggable" (change)="cambiarDraggable()">
+            <option value="1">Si</option>
+            <option value="0">No</option>
           </select>
         </div>
         
@@ -37,7 +44,7 @@
               {{ marcador.desc }}
             </p>
             <p>
-              <a class="text-danger puntero" (click)="this._ms.borrarMarcador(i)" class="text-danger">Borrar marcador</a>
+              <a class="text-danger puntero" (click)="this._ms.borrarMarcador(i); marcadorSel=null" class="text-danger">Borrar marcador</a>
             </p>
           </agm-info-window>
         </agm-marker>
