@@ -3,16 +3,41 @@
 <div class="container main-container">
   <div class="row">
     <div class="col-md-4">
-      <h5>Marcador</h5>
+      <div *ngIf="marcadorSel">
+        <h5>Marcador</h5>
+        <hr>
+        <div class="form-group">
+          <label>Titulo</label>
+          <input type="text" name="titulo" [(ngModel)]="marcadorSel.titulo" class="form-control" />
+        </div>
+        
+        <div class="form-group">
+          <label>Descripcion</label>
+          <textarea type="text" name="descripcion" [(ngModel)]="marcadorSel.desc" rows=5 class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <select class=form-control [(ngModel)]="marcadorSel.draggable" name="draggable">
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="_ms.guardarMarcadores()">Guardar Cambios</button>
+      </div>
     </div>
 
     <div class="col-md-8">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="true" (mapClick)="clickMapa($event)">
-        <agm-marker [latitude]="marcador.lat" [longitude]="marcador.lng" *ngFor="let marcador of _ms.marcadores" [title]="marcador.titulo" [markerDraggable]="marcador.draggable">
-          <agm-info-window>        
+        <agm-marker [latitude]="marcador.lat" [longitude]="marcador.lng" *ngFor="let marcador of _ms.marcadores; let i = index" [title]="marcador.titulo"
+          [markerDraggable]="marcador.draggable" (markerClick)="clickMarcador(marcador, i)" (dragEnd)="dragEndMarcador(marcador, $event)">
+          <agm-info-window>
+            <strong>{{ marcador.titulo }}</strong>
             <p ng-if="marcador.desc">
-              <strong>{{ marcador.titulo }}</strong>
-                {{ marcador.desc }}
+              {{ marcador.desc }}
+            </p>
+            <p>
+              <a class="text-danger puntero" (click)="this._ms.borrarMarcador(i)" class="text-danger">Borrar marcador</a>
             </p>
           </agm-info-window>
         </agm-marker>
